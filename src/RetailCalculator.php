@@ -12,7 +12,13 @@ class RetailCalculator {
         }, 0.0);
 
         $taxCoefficient = 1 + (self::UTAH_TAXRATE / 100);
-        return $itemsTotalPrice * $taxCoefficient;
+        return $this->round_up($itemsTotalPrice * $taxCoefficient);
+    }
+
+    function round_up(float $value) {
+        $precision = 2;
+        $multiplier = pow(10, $precision);
+        return ceil($value * $multiplier) / $multiplier;
     }
 
 }
