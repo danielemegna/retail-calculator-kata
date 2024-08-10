@@ -33,6 +33,8 @@ class RetailCalculator {
     }
 
     private function taxRateFor(string $stateCode): float {
+        if ($stateCode === 'UT')
+            return 6.85;
         if ($stateCode === 'NV')
             return 8.00;
         if ($stateCode === 'TX')
@@ -42,7 +44,7 @@ class RetailCalculator {
         if ($stateCode === 'CA')
             return 8.25;
         
-        return 6.85;
+        throw new UnsupportedStateException($stateCode);
     }
 
     private function roundUp(float $value): float {

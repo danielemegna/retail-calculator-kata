@@ -159,5 +159,12 @@ class AcceptanceTest extends TestCase {
         $this->assertEquals(52421.2, $actual);
     }
 
+    /** @test */
+    public function throwProperExceptionOnUnknownStateCode() {
+        $this->expectException(UnsupportedStateException::class);
+        $this->expectExceptionMessage("Unsupported state code [ZZ]");
+        $this->retailCalculator->totalFor([new PurchaseItem(100)], 'ZZ');
+    }
+
 }
 
