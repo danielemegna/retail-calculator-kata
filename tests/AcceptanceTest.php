@@ -166,5 +166,14 @@ class AcceptanceTest extends TestCase {
         $this->retailCalculator->totalFor([new PurchaseItem(100)], 'ZZ');
     }
 
+    /** @skiptest */
+    public function startTheFloatNightmare() {
+        // see: floating-point-gui.de
+        $actual = $this->retailCalculator->totalFor([new PurchaseItem(990)], 'AL');
+        $this->assertEquals(1029.60, $actual);
+        $actual = $this->retailCalculator->totalFor([new PurchaseItem(21900)], 'AL');
+        $this->assertEquals(20498.40, $actual);
+    }
+
 }
 
