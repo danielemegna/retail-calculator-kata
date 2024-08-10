@@ -26,7 +26,8 @@ class RetailCalculator {
     private function discountRateFor(float $totalPrice): int {
         if ($totalPrice < 1000) return 0;
         if ($totalPrice < 5000) return 3;
-        return 5;
+        if ($totalPrice < 7000) return 5;
+        return 7;
     }
 
     private function taxRateFor(string $stateCode): float {

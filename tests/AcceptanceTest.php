@@ -114,7 +114,7 @@ class AcceptanceTest extends TestCase {
     }
 
     /** @test */
-    public function applyMoreDiscountForSixThousandDollarsProducts() {
+    public function applyMoreDiscountFromFiveToSevenThousandDollars() {
         $actual = $this->retailCalculator->totalFor([
             new PurchaseItem(3500),
             new PurchaseItem(2000),
@@ -123,6 +123,18 @@ class AcceptanceTest extends TestCase {
         ], 'NV');
 
         $this->assertEquals(6156, $actual);
+    }
+
+    /** @test */
+    public function applyMoreDiscountFromSevenToTenThousandDollars() {
+        $actual = $this->retailCalculator->totalFor([
+            new PurchaseItem(5000),
+            new PurchaseItem(1000),
+            new PurchaseItem(800),
+            new PurchaseItem(700)
+        ], 'AL');
+
+        $this->assertEquals(7254, $actual);
     }
 
 }
