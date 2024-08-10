@@ -6,13 +6,7 @@ class RetailCalculator {
     public function totalFor(array $items, string $stateCode): float {
         $itemsTotalPrice = $this->totalPriceFor($items);
 
-        $discountRate = 0;
-        if ($itemsTotalPrice >= 5000.0) {
-            $discountRate = 5;
-        } else if ($itemsTotalPrice >= 1000.0) {
-            $discountRate = 3;
-        }
-
+        $discountRate = $this->discountRateFor($itemsTotalPrice);
         $discountCoefficient = 1 - ($discountRate / 100);
         $discountedTotalPrice = $itemsTotalPrice * $discountCoefficient;
 
@@ -27,6 +21,12 @@ class RetailCalculator {
         return array_reduce($items, function (float $total, PurchaseItem $item) {
             return $total + $item->getPrice();
         }, 0.0);
+    }
+
+    private function discountRateFor(float $totalPrice): int {
+        if ($totalPrice < 1000) return 0;
+        if ($totalPrice < 5000) return 3;
+        return 5;
     }
 
     private function taxRateFor(string $stateCode): float {
