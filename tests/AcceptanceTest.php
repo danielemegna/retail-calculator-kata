@@ -14,7 +14,7 @@ class AcceptanceTest extends TestCase {
     }
 
     /** @test */
-    public function someProductsInUtahUnderOneThousandDollars() {
+    public function someProductsInUtah() {
         $retailCalculator = new RetailCalculator();
 
         $actual = $retailCalculator->totalFor([
@@ -47,7 +47,7 @@ class AcceptanceTest extends TestCase {
     }
 
     /** @test */
-    public function someProductsInNevadaUnderOneThousandDollars() {
+    public function someProductsInNevada() {
         $retailCalculator = new RetailCalculator();
 
         $actual = $retailCalculator->totalFor([
