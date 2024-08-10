@@ -6,8 +6,8 @@ class RetailCalculator {
     public function totalFor(array $items, string $stateCode): float {
         $itemsTotalPrice = $this->totalPriceFor($items);
 
-        if ($itemsTotalPrice === 1000.0)
-            $itemsTotalPrice = 970;
+        if ($itemsTotalPrice >= 1000.0)
+            $itemsTotalPrice = $itemsTotalPrice * 0.97;
 
         $taxRate = $this->taxRateFor($stateCode);
         $taxCoefficient = 1 + ($taxRate / 100);
