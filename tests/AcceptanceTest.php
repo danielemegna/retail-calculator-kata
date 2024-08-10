@@ -92,6 +92,17 @@ class AcceptanceTest extends TestCase {
     }
 
     /** @test */
+    public function discountNotAppliedForOneThousandDollarsShopTaxIncluded() {
+        $actual = $this->retailCalculator->totalFor([
+            new PurchaseItem(500),
+            new PurchaseItem(400),
+            new PurchaseItem(80),
+        ], 'AL');
+
+        $this->assertEquals(1019.20, $actual);
+    }
+
+    /** @test */
     public function applyDiscountForThreeThousandDollarsProducts() {
         $actual = $this->retailCalculator->totalFor([
             new PurchaseItem(1300),
