@@ -5,15 +5,9 @@ class RetailCalculator {
     /** @param PurchaseItem[] $items */
     public function totalFor(array $items, string $stateCode): float {
         $itemsTotalPrice = $this->totalPriceFor($items);
-
-        $discountRate = $this->discountRateFor($itemsTotalPrice);
-        $discountCoefficient = 1 - ($discountRate / 100);
-        $discountedTotalPrice = $itemsTotalPrice * $discountCoefficient;
-
-        $taxRate = $this->taxRateFor($stateCode);
-        $taxCoefficient = 1 + ($taxRate / 100);
-
-        return $this->roundUp($discountedTotalPrice * $taxCoefficient);
+        $discountedTotalPrice = $this->applyDiscount($itemsTotalPrice);
+        $taxedTotalPrice = $this->applyTax($discountedTotalPrice, $stateCode);
+        return $this->roundUp($taxedTotalPrice);
     }
 
     /** @param PurchaseItem[] $items */
@@ -23,6 +17,12 @@ class RetailCalculator {
         }, 0.0);
     }
 
+    private function applyDiscount(float $itemsTotalPrice): float {
+        $discountRate = $this->discountRateFor($itemsTotalPrice);
+        $discountCoefficient = 1 - ($discountRate / 100);
+        return $itemsTotalPrice * $discountCoefficient;
+    }
+
     private function discountRateFor(float $totalPrice): int {
         if ($totalPrice < 1000) return 0;
         if ($totalPrice < 5000) return 3;
@@ -30,6 +30,12 @@ class RetailCalculator {
         if ($totalPrice < 10000) return 7;
         if ($totalPrice < 50000) return 10;
         return 15;
+    }
+
+    private function applyTax(float $totalPrice, string $stateCode): float {
+        $taxRate = $this->taxRateFor($stateCode);
+        $taxCoefficient = 1 + ($taxRate / 100);
+        return $totalPrice * $taxCoefficient;
     }
 
     private function taxRateFor(string $stateCode): float {
