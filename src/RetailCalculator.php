@@ -15,7 +15,7 @@ class RetailCalculator {
         
         $taxRate = $this->taxRateFor($stateCode);
         $taxCoefficient = 1 + ($taxRate / 100);
-        return $this->round_up($itemsTotalPrice * $taxCoefficient);
+        return $this->roundUp($itemsTotalPrice * $taxCoefficient);
     }
 
     private function taxRateFor(string $stateCode): float {
@@ -25,7 +25,7 @@ class RetailCalculator {
         return self::UTAH_TAXRATE;
     }
 
-    function round_up(float $value) {
+    private function roundUp(float $value): float {
         $precision = 2;
         $multiplier = pow(10, $precision);
         return ceil($value * $multiplier) / $multiplier;
