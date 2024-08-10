@@ -2,11 +2,6 @@
 
 class RetailCalculator {
 
-    /** @var float */
-    private const UTAH_TAXRATE = 6.85;
-    /** @var float */
-    private const NEVADA_TAXRATE = 8.00;
-
     /** @param PurchaseItem[] $items */
     public function totalFor(array $items, string $stateCode): float {
         $itemsTotalPrice = array_reduce($items, function (float $total, PurchaseItem $item) {
@@ -20,9 +15,11 @@ class RetailCalculator {
 
     private function taxRateFor(string $stateCode): float {
         if ($stateCode === 'NV')
-          return self::NEVADA_TAXRATE;
+            return 8.00;
+        if ($stateCode === 'TX')
+            return 6.25;
         
-        return self::UTAH_TAXRATE;
+        return 6.85;
     }
 
     private function roundUp(float $value): float {
