@@ -9,7 +9,10 @@ class RetailCalculator {
     public function totalFor(array $items, string $stateCode): float {
         $itemsTotalPrice = $this->totalPriceFor($items);
 
-        if ($itemsTotalPrice >= 1000.0) {
+        if ($itemsTotalPrice >= 5000.0) {
+            $discountRate = 1 - (5 / 100);
+            $itemsTotalPrice *= $discountRate;
+        } else if ($itemsTotalPrice >= 1000.0) {
             $discountRate = 1 - (self::BIG_SHOP_DISCOUNT_RATE / 100);
             $itemsTotalPrice *= $discountRate;
         }
