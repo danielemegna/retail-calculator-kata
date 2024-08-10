@@ -4,13 +4,17 @@ class RetailCalculator {
 
     /** @param PurchaseItem[] $items */
     public function totalFor(array $items, string $stateCode): float {
-        $itemsTotalPrice = array_reduce($items, function (float $total, PurchaseItem $item) {
-            return $total + $item->getPrice();
-        }, 0.0);
-        
+        $itemsTotalPrice = $this->totalPriceFor($items);
         $taxRate = $this->taxRateFor($stateCode);
         $taxCoefficient = 1 + ($taxRate / 100);
         return $this->roundUp($itemsTotalPrice * $taxCoefficient);
+    }
+
+    /** @param PurchaseItem[] $items */
+    private function totalPriceFor(array $items): float {
+        return array_reduce($items, function (float $total, PurchaseItem $item) {
+            return $total + $item->getPrice();
+        }, 0.0);
     }
 
     private function taxRateFor(string $stateCode): float {
@@ -33,3 +37,4 @@ class RetailCalculator {
     }
 
 }
+
