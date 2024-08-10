@@ -2,12 +2,17 @@
 
 class RetailCalculator {
 
+    /** @var float */
+    private const BIG_SHOP_DISCOUNT_RATE = 3;
+
     /** @param PurchaseItem[] $items */
     public function totalFor(array $items, string $stateCode): float {
         $itemsTotalPrice = $this->totalPriceFor($items);
 
-        if ($itemsTotalPrice >= 1000.0)
-            $itemsTotalPrice = $itemsTotalPrice * 0.97;
+        if ($itemsTotalPrice >= 1000.0) {
+            $discountRate = 1 - (self::BIG_SHOP_DISCOUNT_RATE / 100);
+            $itemsTotalPrice *= $discountRate;
+        }
 
         $taxRate = $this->taxRateFor($stateCode);
         $taxCoefficient = 1 + ($taxRate / 100);
