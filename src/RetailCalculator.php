@@ -18,6 +18,10 @@ class RetailCalculator {
             return 8.00;
         if ($stateCode === 'TX')
             return 6.25;
+        if ($stateCode === 'AL')
+            return 4.00;
+        if ($stateCode === 'CA')
+            return 8.25;
         
         return 6.85;
     }

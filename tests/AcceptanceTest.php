@@ -73,4 +73,22 @@ class AcceptanceTest extends TestCase {
         $this->assertEquals(695.68, $actual);
     }
 
+    /** @test */
+    public function singleProductInAlabama() {
+        $retailCalculator = new RetailCalculator();
+
+        $actual = $retailCalculator->totalFor([new PurchaseItem(442.90)], 'AL');
+
+        $this->assertEquals(460.62, $actual);
+    }
+
+    /** @test */
+    public function singleProductInCalifornia() {
+        $retailCalculator = new RetailCalculator();
+
+        $actual = $retailCalculator->totalFor([new PurchaseItem(685.24)], 'CA');
+
+        $this->assertEquals(741.78, $actual);
+    }
+
 }
