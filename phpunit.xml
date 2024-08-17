@@ -1,2 +1,7 @@
-<phpunit colors="true" testdox="true">
+<phpunit colors="true" testdox="true" defaultTestSuite="all">
+    <testsuites>
+        <testsuite name="all">
+            <directory suffix="Test.php">tests</directory>
+        </testsuite>
+    </testsuites>
 </phpunit>

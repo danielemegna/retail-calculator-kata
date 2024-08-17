@@ -15,7 +15,9 @@ $ ./composer.phar install
 Run the tests with
 
 ```
-$ ./composer.phar exec phpunit ./tests
+$ ./composer.phar exec phpunit
+$ ./composer.phar exec phpunit ./tests/SingleTest.php
+$ ./composer.phar exec -- phpunit --filter someProductsInUtah
 ```
 
 ### Docker only dev setup
