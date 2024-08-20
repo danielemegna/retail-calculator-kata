@@ -49,10 +49,10 @@ class RetailCalculator {
         }
     }
 
-    private function roundUp(float $value): float {
-        $precision = 2;
+    private function roundUp(float $value, int $precision = 2): float {
         $multiplier = pow(10, $precision);
-        return ceil($value * $multiplier) / $multiplier;
+        $valueInCents = bcmul($value, $multiplier, $precision);
+        return ceil($valueInCents) / $multiplier;
     }
 
 }

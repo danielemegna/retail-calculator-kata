@@ -26,7 +26,7 @@ Create a temporary php7 container with mapped source folder and install minimal 
 
 ```
 $ docker run --rm -it -v $PWD:/app -w /app php:7.3.14 bash
-# apt-get update && apt-get install -y git libzip-dev && docker-php-ext-install zip
+# apt-get update && apt-get install -y git libzip-dev && docker-php-ext-install zip bcmath
 ```
 
 Composer commands can be now executed in the container:
